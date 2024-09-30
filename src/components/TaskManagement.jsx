@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from "react";
 import TaskList from "./TaskList";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from 'react-redux';
 import { getAssignedTasks } from "../services/operations/endpoints"; // Import the function to fetch assigned tasks
 import AssignedTask from "./AssignedTask"
 
 const TaskManagement = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
   const [assignedTasks, setAssignedTasks] = useState([]);
 
   useEffect(() => {
@@ -15,7 +13,7 @@ const TaskManagement = () => {
     if (user && user.accountType === "Admin") {
       navigate('/admin'); 
     } else {
-      dispatch(getAssignedTasks(setAssignedTasks)); 
+        getAssignedTasks(setAssignedTasks)(); 
     }
     // eslint-disable-next-line
   }, []);

@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { AddTask, DeleteTask, getAllUsers } from "../services/operations/endpoints"; 
-import { useDispatch } from 'react-redux';
 
 const TaskListDetails = ({ taskList }) => {
-    const dispatch = useDispatch();
     const [tasks, setTasks] = useState(taskList.tasks);
     const [allUsers, setAllUsers] = useState([]);
     const [formData, setFormData] = useState({
@@ -23,17 +21,17 @@ const TaskListDetails = ({ taskList }) => {
     };
 
     useEffect(() => {
-        dispatch(getAllUsers(setAllUsers));
-    }, [dispatch]);
+        getAllUsers(setAllUsers);
+    }, []);
 
     // Handle adding a new task
     const handleAddTask = async () => {
-        dispatch(AddTask(setTasks, tasks, formData, taskList));
+        await AddTask(setTasks, tasks, formData, taskList)();
     };
 
     // Handle deleting a task
     const handleDeleteTask = async (taskId) => {
-        dispatch(DeleteTask(taskId, tasks, setTasks)); 
+        await DeleteTask(taskId, tasks, setTasks)(); 
     };
 
     // Function to get the color based on task status

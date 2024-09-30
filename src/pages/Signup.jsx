@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
-import { setSignupData } from '../slices/authSlice';
+// import { setSignupData } from '../slices/authSlice';
 import { toast } from "react-hot-toast"
-import { useDispatch } from 'react-redux';
+// import { useDispatch } from 'react-redux';
 import { ACCOUNT_TYPE } from "../utils/constants.js";
 import { signUp } from "../services/operations/endpoints.js";
 import { useNavigate } from 'react-router-dom';
 
 function Signup() {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   const [accountType] = useState(ACCOUNT_TYPE.TASK_OWNER);
 
@@ -29,7 +29,7 @@ function Signup() {
     }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
     if (password !== confirmPassword) {
@@ -42,8 +42,8 @@ function Signup() {
       accountType,
     };
 
-    dispatch(setSignupData(signupData));
-    dispatch(signUp(signupData, navigate));
+    // dispatch(setSignupData(signupData));
+    signUp(signupData, navigate)();
   };
 
   return (

@@ -1,6 +1,6 @@
 import { toast } from "react-hot-toast"
 import { apiConnector } from "../apiconnector"
-import {setToken } from "../../slices/authSlice"
+// import {setToken } from "../../slices/authSlice"
 import { Authendpoints, TaskListEndpoints, TASK_Endpoints, User_EndPoints } from "../apis"
 
 
@@ -85,7 +85,7 @@ export function login(email, password, navigate) {
       }
 
       toast.success("Login Successful")
-      dispatch(setToken(response.data.token))
+      // dispatch(setToken(response.data.token))
       
       localStorage.setItem("token", JSON.stringify(response.data.token))
       localStorage.setItem("user", JSON.stringify(response.data.user))
@@ -243,7 +243,7 @@ export function getAssignedTasks(setAssignedTasks){
       setAssignedTasks(response.data.data);
       
     }catch(err){
-      toast.error(err.response.message)
+      toast.error(err.response.data.message)
     }
   }
 }

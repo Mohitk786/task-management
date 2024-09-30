@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { getAllUsers } from '../../services/operations/endpoints';
 
 const UserManagement = () => {
-    const dispatch = useDispatch();
     const [users, setAllUsers] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -15,9 +13,9 @@ const UserManagement = () => {
         setAllUsers(updatedUsers);
     };
 
-    const fetchAllUsers =  () => {
+    const fetchAllUsers =  async() => {
         try {
-             dispatch(getAllUsers(setAllUsers));
+            await getAllUsers(setAllUsers)();
         } catch (err) {
             setError("Failed to fetch users. Please try again.");
         } finally {

@@ -1,9 +1,7 @@
 import React from 'react'
-import {updateTask } from "../services/operations/endpoints"; // Import the function to fetch assigned tasks
-import { useDispatch } from 'react-redux';
+import {updateTask } from "../services/operations/endpoints"; 
 
 const AssignedTask = ({assignedTasks, setAssignedTasks}) => {
-  const dispatch = useDispatch();
 
   return (
     <div className="mt-8 w-full max-w-3xl mx-auto bg-white shadow-md rounded-lg p-6">
@@ -22,7 +20,7 @@ const AssignedTask = ({assignedTasks, setAssignedTasks}) => {
               <select 
                 className="border border-gray-300 p-2 rounded-md flex-grow"
                 value={task.status}
-                onChange={(e) => dispatch(updateTask(task._id, e.target.value, setAssignedTasks, assignedTasks))} // Assuming you have a function to update task status
+                onChange={async (e) => await updateTask(task._id, e.target.value, setAssignedTasks, assignedTasks)()} // Assuming you have a function to update task status
               >
                 <option value="Not Started">Not Started</option>
                 <option value="In Progress">In Progress</option>

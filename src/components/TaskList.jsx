@@ -1,17 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import TaskListDetails from './Task';
-import { useDispatch } from 'react-redux';
 import { getUserLists, getAllLists, addList } from "../services/operations/endpoints";
 
 const TaskList = () => {
     const user = JSON.parse(localStorage.getItem('user')); // Parse user data
-    const dispatch = useDispatch();
     const [allTasks, setAllTasks] = useState([]);
     const [newListName, setNewListName] = useState('');
     const [expandedTaskListId, setExpandedTaskListId] = useState(null);
 
     const fetchAllTasks = async () => {
-        user.accountType === "Admin" ? dispatch(getAllLists(setAllTasks)) : dispatch(getUserLists(setAllTasks));
+        user.accountType === "Admin" ? getAllLists(setAllTasks)() : getUserLists(setAllTasks)();
     };
 
     useEffect(() => {
@@ -19,9 +17,9 @@ const TaskList = () => {
         // eslint-disable-next-line
     }, []);
 
-    const handleCreateTaskList = () => {
-        if (newListName.trim()) { // Ensure the list name is not empty
-            dispatch(addList(newListName, allTasks, setAllTasks));
+    const handleCreateTaskList = async() => {
+        if (newListName.trim()) { 
+            await addList(newListName, allTasks, setAllTasks)();
             setNewListName(''); // Clear the input after adding the list
         }
     };

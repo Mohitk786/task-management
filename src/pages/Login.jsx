@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { login } from '../services/operations/endpoints';
-import { useDispatch } from "react-redux"
+// import { useDispatch } from "react-redux"
 import { Link, useNavigate } from "react-router-dom"
 
 function Login() {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   const [formData, setFormData] = useState({
     email: "",
@@ -23,7 +23,7 @@ function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(login(email, password, navigate));
+    login(email, password, navigate)();
   };
 
   return (
