@@ -27,7 +27,6 @@ exports.addTask =  async (req, res) => {
       taskList: req.params.listId
     });
     await newTask.save();
-    console.log(newTask)
 
     if(assignedUser){
       const user = await User.findByIdAndUpdate(assignedUser, {

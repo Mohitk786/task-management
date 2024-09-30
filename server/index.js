@@ -18,7 +18,20 @@ database.connect();
 app.use(express.json());
 app.use(cookieParser());
 
-app.use(cors())
+app.use((req, res, next) => {
+	// Allow requests from your specific domain
+	res.header('Access-Control-Allow-Origin', process.env.DOMAIN);
+  
+	// Allow credentials (cookies, authorization headers, etc.)
+	res.header('Access-Control-Allow-Credentials', true);
+  
+	// Specify allowed methods and headers
+	res.header('Access-Control-Allow-Methods', 'GET, POST');
+	res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  
+	// Continue to the next middleware
+	next();
+  });
 
 
 

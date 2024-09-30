@@ -95,7 +95,8 @@ exports.login = async (req, res) => {
       })
     }
 
-    if (bcrypt.compare(password, user.password)) {
+
+    if (await bcrypt.compare(password, user.password)) {
       
       const token = jwt.sign({ 
           email: user.email,
@@ -130,7 +131,6 @@ exports.login = async (req, res) => {
     }
 
   }catch (error) {
-    console.error(error)
     return res.status(500).json({
       success: false,
       message: `Login Failure Please Try Again`,

@@ -24,6 +24,7 @@ const TaskListDetails = ({ taskList }) => {
         getAllUsers(setAllUsers);
     }, []);
 
+
     // Handle adding a new task
     const handleAddTask = async () => {
         await AddTask(setTasks, tasks, formData, taskList)();
@@ -51,7 +52,7 @@ const TaskListDetails = ({ taskList }) => {
     return (
         <div className="mt-4 p-4 bg-gray-50 rounded-lg shadow-md">
             <h2 className="text-xl font-bold mb-4">Manage Tasks</h2>
-            <div className="flex flex-wrap mb-4 space-x-2">
+            <form className="flex flex-wrap mb-4 space-x-2">
                 <input
                     className="border p-2 rounded flex-grow min-w-[200px]"
                     type="text"
@@ -94,7 +95,7 @@ const TaskListDetails = ({ taskList }) => {
                 >
                     Add Task
                 </button>
-            </div>
+            </form>
 
             {/* Render the list of tasks */}
             <ul className="mt-4 space-y-2">

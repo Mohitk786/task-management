@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import TaskListDetails from './Task';
+import TaskListDetails from './TaskListDetails';
 import { getUserLists, getAllLists, addList } from "../services/operations/endpoints";
 
 const TaskList = () => {
-    const user = JSON.parse(localStorage.getItem('user')); // Parse user data
+    const user = JSON.parse(localStorage.getItem('user')); 
     const [allTasks, setAllTasks] = useState([]);
     const [newListName, setNewListName] = useState('');
     const [expandedTaskListId, setExpandedTaskListId] = useState(null);
@@ -47,6 +47,7 @@ const TaskList = () => {
                     Create Task List
                 </button>
             </div>
+
             <ul className="space-y-4">
                 {allTasks.map((list) => (
                     <li key={list._id} className="border border-gray-200 p-4 rounded-lg transition-shadow hover:shadow-lg">

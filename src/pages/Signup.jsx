@@ -1,15 +1,12 @@
 import React, { useState } from 'react';
-// import { setSignupData } from '../slices/authSlice';
 import { toast } from "react-hot-toast"
-// import { useDispatch } from 'react-redux';
 import { ACCOUNT_TYPE } from "../utils/constants.js";
 import { signUp } from "../services/operations/endpoints.js";
 import { useNavigate } from 'react-router-dom';
 
 function Signup() {
+  
   const navigate = useNavigate();
-  // const dispatch = useDispatch();
-
   const [accountType] = useState(ACCOUNT_TYPE.TASK_OWNER);
 
   const [formData, setFormData] = useState({
@@ -29,21 +26,22 @@ function Signup() {
     }));
   };
 
-  const handleSubmit = (e) => {
+  //handle form submission
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (password !== confirmPassword) {
       toast.error("Passwords do not match");
       return;
     }
-
+    
     const signupData = {
       ...formData,
       accountType,
     };
 
-    // dispatch(setSignupData(signupData));
-    signUp(signupData, navigate)();
+    await signUp(signupData, navigate)();
+
   };
 
   return (

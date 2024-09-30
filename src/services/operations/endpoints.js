@@ -1,6 +1,5 @@
 import { toast } from "react-hot-toast"
 import { apiConnector } from "../apiconnector"
-// import {setToken } from "../../slices/authSlice"
 import { Authendpoints, TaskListEndpoints, TASK_Endpoints, User_EndPoints } from "../apis"
 
 
@@ -70,7 +69,7 @@ export function signUp(
 }
 
 export function login(email, password, navigate) {
-  return async (dispatch) => {
+  return async () => {
     const toastId = toast.loading("Loading...")
     
     try {
@@ -85,7 +84,6 @@ export function login(email, password, navigate) {
       }
 
       toast.success("Login Successful")
-      // dispatch(setToken(response.data.token))
       
       localStorage.setItem("token", JSON.stringify(response.data.token))
       localStorage.setItem("user", JSON.stringify(response.data.user))
@@ -93,8 +91,9 @@ export function login(email, password, navigate) {
       navigate("/")
 
     }catch (error) {
-      console.log("LOGIN API ERROR", error)
-      toast.error(error.response.data.message);
+      toast.dismiss(toastId)
+      console.log("LOGIN API ERROR", error.message)
+      toast.error(error?.response?.data?.message);
     }
     
   }
