@@ -53,7 +53,7 @@ export function signUp(
 
   
         if (!response?.data?.success) {
-          throw new Error(response.data.message)
+          throw new Error(response?.data?.message)
         }
   
         toast.success("Signup Successfull")
@@ -92,8 +92,8 @@ export function login(email, password, navigate) {
 
     }catch (error) {
       toast.dismiss(toastId)
-      console.log("LOGIN API ERROR", error.message)
       toast.error(error?.response?.data?.message);
+      console.log("LOGIN API ERROR", error.message)
     }
     
   }
